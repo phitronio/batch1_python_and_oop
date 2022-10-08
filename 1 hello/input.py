@@ -1,0 +1,6 @@
+# input('Tell me your age: ')
+name = input('Dude, what is your name: ')
+age = input('Tell us about your age: ')
+print('I can take input now.')
+# print(age)
+print(name, age)
