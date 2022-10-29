@@ -10,6 +10,7 @@ class Vehicle(ABC):
         self.vehicle_type = vehicle_type
         self.rate = rate
         self.driver = driver
+        self.status = 'available'
         self.license_plate = license_plate
         self.speed = self.speed[vehicle_type]
 
@@ -28,9 +29,11 @@ class Car(Vehicle):
 
     
     def start_driving(self):
+        self.status = 'unavailable'
         print(self.vehicle_type, self.license_plate, 'started')
         
     def trip_finished(self):
+        self.status = 'available'
         print(self.vehicle_type, self.license_plate, 'completed trip')
 
 
@@ -40,9 +43,11 @@ class Bike(Vehicle):
 
     
     def start_driving(self):
+        self.status = 'unavailable'
         print(self.vehicle_type, self.license_plate, 'started')
         
     def trip_finished(self):
+        self.status = 'available'
         print(self.vehicle_type, self.license_plate, 'completed trip')
 
 
@@ -52,9 +57,11 @@ class Cng(Vehicle):
 
     
     def start_driving(self):
+        self.status = 'unavailable'
         print(self.vehicle_type, self.license_plate, 'started')
         
     def trip_finished(self):
+        self.status = 'available'
         print(self.vehicle_type, self.license_plate, 'completed trip')
 
 
