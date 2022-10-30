@@ -33,7 +33,7 @@ class RideManager:
             vehicles = self.__available_cng 
         
         if len(vehicles) == 0:
-            print('sorry no cars is available')
+            print(f'Sorry no {vehicle_type} is available.')
             return False
         for vehicle in vehicles:
             # print('potential', rider.location, car.driver.location)
@@ -44,14 +44,13 @@ class RideManager:
                     print('You do not have enough money for this trip.', fare, rider.balance)
                     return False
                 if vehicle.status == 'available':
-                    vehicle.status = 'unavailable'
                     trip_info = f'Match {vehicle_type} for {rider.name} for fare: {fare} with {vehicle.driver.name} started: {rider.location} to: {destination}'
                     print(trip_info)
+                    self.__trip_history.append(trip_info)
                     vehicles.remove(vehicle)
                     rider.start_a_trip(fare, trip_info)
                     vehicle.driver.start_a_trip(rider.location, destination, fare*0.8, trip_info)
                     self.__income += fare * 0.2
-                    self.__trip_history.append(trip_info)
                     
                     return True
                     

@@ -1,8 +1,8 @@
 import hashlib
-from random import random, randint, choice
+from random import randint, choice
 import threading
 from brta import BRTA
-from vehicles import Bike, Car, Cng, Vehicle
+from vehicles import Bike, Car, Cng
 from ride_manager import uber
 
 class UserAlreadyExists(Exception):
@@ -63,9 +63,6 @@ class Rider(User):
     def get_location(self):
         return self.location
 
-    def request_trip(self, destination):
-        pass
-
     def get_trip_history(self):
         return self.__trip_history
 
@@ -112,11 +109,11 @@ class Driver(User):
     def start_a_trip(self, start, destination, fare, trip_info):
         self.earning += fare
         self.location = destination
+        self.__trip_history.append(trip_info)
         # start thread
         trip_thread = threading.Thread(target=self.vehicle.start_driving, args=(start, destination,))
         trip_thread.start()
         # self.vehicle.start_driving(start, destination)
-        self.__trip_history.append(trip_info)
 
 
 rider1 = Rider('rider1', 'rider1@gmail.com', 'rider1', randint(0, 30), 1000)
@@ -133,6 +130,7 @@ for i in range(1, 100):
     driver1.register_a_vehicle(choice(vehicle_types), randint(10000, 99999), 10)
 
 print(uber.get_available_cars())
+
 uber.find_a_vehicle(rider1, choice(vehicle_types), randint(1, 100))
 uber.find_a_vehicle(rider2, choice(vehicle_types), randint(1, 100))
 uber.find_a_vehicle(rider3, choice(vehicle_types), randint(1, 100))
