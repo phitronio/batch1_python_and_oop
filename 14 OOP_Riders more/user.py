@@ -53,6 +53,7 @@ class Rider(User):
     def __init__(self, name, email, password, location, balance) -> None:
         self.location = location
         self.balance = balance
+        self.__trip_history = []
         super().__init__(name, email, password)
 
     def set_location(self, location):
@@ -64,13 +65,18 @@ class Rider(User):
     def request_trip(self, destination):
         pass
 
-    def start_a_trip(self, fare):
+    def get_trip_history(self):
+        return self.__trip_history
+
+    def start_a_trip(self, fare, trip_info):
         self.balance -= fare
+        self.__trip_history.append(trip_info)
 
 class Driver(User):
     def __init__(self, name, email, password, location, license) -> None:
         super().__init__(name, email, password)
         self.location = location
+        self.__trip_history = []
         self.license = license
         self.valid_driver = license_authority.validate_license(email, license)
         self.earning = 0
@@ -100,9 +106,10 @@ class Driver(User):
             # print('You are not a valid driver')
 
 
-    def start_a_trip(self, destination, fare):
+    def start_a_trip(self, destination, fare, trip_info):
         self.earning += fare
         self.location = destination
+        self.__trip_history.append(trip_info)
 
 
 rider1 = Rider('rider1', 'rider1@gmail.com', 'rider1', randint(0, 30), 1000)
@@ -120,3 +127,5 @@ uber.find_a_vehicle(rider1, 'car', randint(1, 100))
 uber.find_a_vehicle(rider1, 'car', randint(1, 100))
 uber.find_a_vehicle(rider1, 'car', randint(1, 100))
 uber.find_a_vehicle(rider1, 'car', randint(1, 100))
+
+print(rider1.get_trip_history())
