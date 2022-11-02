@@ -1,0 +1,5 @@
+1. Attributes validation using assert (Done)
+2. Dynamic Attributes (Done)
+3. Create objects from json in files (Done)
+4. Multiple inheritance and MRO(Method resolution order) (Done)
+5. Duck typing 
