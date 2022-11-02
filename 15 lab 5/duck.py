@@ -9,7 +9,7 @@ class Teacher:
     def __init__(self,name) -> None:
         self.teacherName = name
     def say_hello(self):
-        print(f"Hello from teacher")
+        print(f"Hello from teacher") 
         
 class Student:
     def __init__(self,name,obj) -> None:
