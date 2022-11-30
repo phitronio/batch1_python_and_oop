@@ -13,9 +13,10 @@ class AllAirports:
         country_currency = {}
 
         # get currency name <---> rate
-        with open('./data/currencyrates.csv', 'r') as file:
+        with open('./data/airport.csv', 'r') as file:
             lines = csv.reader(file)
             for line in lines:
+                # print(line)
                 currency_rates[line[1]] = line[2]
         file.close()
 

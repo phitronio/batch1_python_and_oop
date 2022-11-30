@@ -25,6 +25,7 @@ while True:
 
         object_path = source_object[0]
         shutil.copy(object_path, '.')
+        print(object_path)
 
         object_name = object_path.split('/')[-1].split('.')
         prefix = object_name[0]
